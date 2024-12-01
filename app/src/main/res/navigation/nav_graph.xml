@@ -27,7 +27,7 @@
 
         <action
             android:id="@+id/action_singInFragment_to_OTPFragment"
-            app:enterAnim="@anim/from_right"
+            app:enterAnim="@anim/from_bottom"
             app:destination="@id/OTPFragment" />
 
     </fragment>

@@ -21,7 +21,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.blinkit.R
 import com.example.blinkit.core.common.Extensions.showToast
 import com.example.blinkit.databinding.FragmentSingInBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SingInFragment : Fragment() {
 
     private var _binding: FragmentSingInBinding? = null
@@ -37,6 +39,8 @@ class SingInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.white)
+        requireActivity().window.navigationBarColor = ContextCompat.getColor(requireContext(), R.color.white)
 
         startStableInfiniteScroll()
         getUserNumber()

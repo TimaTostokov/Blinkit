@@ -1,6 +1,8 @@
 package com.example.blinkit.presentation.fragments.auth.viewmodel
 
 import android.app.Activity
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.example.blinkit.core.common.Extensions
 import com.example.blinkit.data.remote.model.users.User
@@ -10,12 +12,16 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
+    @ApplicationContext
+    private val context: Context
 ) : ViewModel() {
 
     private val _verificationId = MutableStateFlow<String?>(null)
@@ -25,6 +31,13 @@ class AuthViewModel @Inject constructor(
 
     private val _isSignedInSuccessfully = MutableStateFlow(false)
     val isSignedInSuccessfully = _isSignedInSuccessfully
+
+    private val _isACurrentUser = MutableStateFlow(false)
+    val isACurrentUser: StateFlow<Boolean> = _isACurrentUser
+
+    init {
+        _isACurrentUser.value = Extensions.getAuthInstance().currentUser != null
+    }
 
     fun sendOTP(userNumber: String, activity: Activity) {
         val callback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -57,12 +70,22 @@ class AuthViewModel @Inject constructor(
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     FirebaseDatabase.getInstance().getReference("AllUsers").child("Users").child(user.uid!!).setValue(user)
-                _isSignedInSuccessfully.value = true
-                }
-                else {
-
+                        .addOnSuccessListener {
+                            _isSignedInSuccessfully.value = true
+                        }
+                        .addOnFailureListener {
+                           Extensions.hideDialog()
+                            showToast("Failed to register user data in Firebase.")
+                        }
+                } else {
+                    Extensions.hideDialog()
+                    showToast("Authentication failed.")
                 }
             }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
 }

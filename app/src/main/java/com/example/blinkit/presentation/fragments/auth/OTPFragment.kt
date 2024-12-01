@@ -1,5 +1,6 @@
 package com.example.blinkit.presentation.fragments.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +16,7 @@ import com.example.blinkit.core.common.Extensions.showToast
 import com.example.blinkit.core.common.Extensions.snackbar
 import com.example.blinkit.data.remote.model.users.User
 import com.example.blinkit.databinding.FragmentOTPBinding
+import com.example.blinkit.presentation.activity.UsersMainActivity
 import com.example.blinkit.presentation.fragments.auth.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -64,6 +66,7 @@ class OTPFragment : Fragment() {
             }
             if (otp.length < editText.size) {
                 snackbar("Please enter right OTP")
+                hideDialog()
             } else {
                 editText.forEach { it.text?.clear(); it.clearFocus() }
                 verifyOTP(otp)
@@ -82,7 +85,9 @@ class OTPFragment : Fragment() {
             viewModel.isSignedInSuccessfully.collect {
                 if (it) {
                     hideDialog()
-                    snackbar("Logged In...")
+                    showToast("Logged In...")
+                    startActivity(Intent(requireActivity(), UsersMainActivity::class.java))
+                    requireActivity().finish()
                 }
             }
         }

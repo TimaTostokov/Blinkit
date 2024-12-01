@@ -167,7 +167,6 @@ object Extensions {
         dialog?.dismiss()
     }
 
-
     fun getCurrentUserId(): String{
         return FirebaseAuth.getInstance().currentUser?.uid ?: ""
     }
