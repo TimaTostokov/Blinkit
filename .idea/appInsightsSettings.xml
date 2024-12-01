@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.blinkit" />
+                  <option name="mobileSdkAppId" value="1:615515929159:android:28319e13ce411fa7984f62" />
+                  <option name="projectId" value="blinkit-a0f55" />
+                  <option name="projectNumber" value="615515929159" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

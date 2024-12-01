@@ -85,6 +85,10 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.play.services.auth)
     implementation(libs.google.firebase.analytics)
+    implementation(libs.play.services.auth.api.phone)
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.storage.ktx)
+    implementation(libs.firebase.database.ktx)
 
     implementation (libs.multidex)
 
@@ -96,5 +100,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.zoomage)
+    implementation(libs.github.zoomhelper)
 
 }

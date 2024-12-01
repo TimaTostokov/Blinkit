@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="140dp"
-                android:text="+91"
+                android:text="+996"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 

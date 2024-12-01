@@ -36,7 +36,7 @@
                 android:id="@+id/tvSplashc"
                 android:layout_width="wrap_content"
                 android:layout_height="91dp"
-                android:text="it"
+                android:text="@string/it"
                 android:textColor="@color/green"
                 android:textSize="78sp"
                 android:textStyle="bold" />
@@ -46,9 +46,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kyrgyzstan\'s last mintue app "
+            android:text="Зайди и перекуси"
+            android:fontFamily="@font/recoleta"
             android:textColor="@color/black"
-            android:textSize="19.50sp" />
+            android:textSize="22sp" />
 
         <View
             android:layout_width="234dp"
@@ -64,7 +65,7 @@
             android:letterSpacing="0.1"
             android:text="A TOLYAN COMPANY"
             android:textColor="@color/black"
-            android:textSize="11sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
     </LinearLayout>

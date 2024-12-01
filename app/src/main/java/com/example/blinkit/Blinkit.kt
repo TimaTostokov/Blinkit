@@ -4,7 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
 import com.google.firebase.FirebaseApp
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class Blinkit : Application() {
 
     override fun onCreate() {

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -20,8 +21,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.example.blinkit.R
-import com.example.blinkit.core.common.Constants.APP_ACTIVITY
+import com.example.blinkit.databinding.ProgressDialogBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -59,18 +61,12 @@ object Extensions {
         this.visibility = View.GONE
     }
 
-    fun hideKeyboard() {
-        val imm: InputMethodManager = APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE)
-                as InputMethodManager
-        imm.hideSoftInputFromWindow(APP_ACTIVITY.window.decorView.windowToken, 0)
-    }
-
     fun Int.formatAsPrice(): String {
         val formatter = DecimalFormat("#,###")
         return formatter.format(this)
     }
 
-    fun Context.getProgressBar(): CircularProgressDrawable {
+    private fun Context.getProgressBar(): CircularProgressDrawable {
         val circularProgressDrawable = CircularProgressDrawable(this).apply {
             strokeWidth = 7f
             centerRadius = 40f
@@ -148,6 +144,32 @@ object Extensions {
             type = "message/rfc822"
         }
         startActivity(Intent.createChooser(intent, "Choose an email client:"))
+    }
+
+    private var firebaseAuthInstance: FirebaseAuth? = null
+    fun getAuthInstance(): FirebaseAuth {
+        if (firebaseAuthInstance == null) {
+            firebaseAuthInstance = FirebaseAuth.getInstance()
+        }
+        return firebaseAuthInstance!!
+    }
+
+    private var dialog: AlertDialog? = null
+
+    fun showDialog(context: Context, message: String) {
+        val progress = ProgressDialogBinding.inflate(LayoutInflater.from(context))
+        progress.tvMessage.text = message
+        dialog = AlertDialog.Builder(context).setView(progress.root).setCancelable(false).create()
+        dialog!!.show()
+    }
+
+    fun hideDialog() {
+        dialog?.dismiss()
+    }
+
+
+    fun getCurrentUserId(): String{
+        return FirebaseAuth.getInstance().currentUser?.uid ?: ""
     }
 
 }
