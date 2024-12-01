@@ -54,6 +54,7 @@ class SingInFragment : Fragment() {
             if (number.isEmpty() || number.length < 9) {
                 showToast("Please enter valid phone number")
             } else {
+                binding.btnContinue.isEnabled = false
                 val bundle = Bundle().also {
                     it.putString("number", number)
                 }
@@ -126,7 +127,7 @@ class SingInFragment : Fragment() {
         parent.removeView(imageView)
 
         val animator = ValueAnimator.ofFloat(0f, bitmap.width.toFloat())
-        animator.duration = 5000L
+        animator.duration = 15000L
         animator.interpolator = LinearInterpolator()
         animator.repeatCount = ValueAnimator.INFINITE
 

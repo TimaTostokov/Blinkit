@@ -9,6 +9,19 @@
     android:fitsSystemWindows="true"
     tools:context=".presentation.activity.UsersMainActivity">
 
+    <TextView
+        android:id="@+id/timeSpentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Время в приложении: 0 минут"
+        android:layout_marginTop="16dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/yellow"
+        android:textColorHint="@color/yellow"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="MissingConstraints" />
+
     <fragment
         android:id="@+id/nav_host_fragment_container_users"
         android:name="androidx.navigation.fragment.NavHostFragment"

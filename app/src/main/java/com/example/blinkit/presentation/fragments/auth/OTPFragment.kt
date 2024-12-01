@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.blinkit.R
 import com.example.blinkit.core.common.Extensions
 import com.example.blinkit.core.common.Extensions.hideDialog
 import com.example.blinkit.core.common.Extensions.showToast
@@ -94,7 +95,9 @@ class OTPFragment : Fragment() {
     }
 
     private fun sendOTP() {
-        Extensions.showDialog(requireContext(), "Sending OTP...")
+        if (!viewModel.otpSend.value) {
+            Extensions.showDialog(requireContext(), "Sending OTP...")
+        }
         viewModel.apply {
             viewModel.sendOTP(userNumber.toString().trim(), requireActivity())
             lifecycleScope.launch {
@@ -117,6 +120,18 @@ class OTPFragment : Fragment() {
             binding.etOtp5,
             binding.etOtp6
         )
+
+        fun updateLoginButtonState() {
+            val allFieldsFilled = editTexts.all { it.text.toString().isNotEmpty() }
+            if (allFieldsFilled) {
+                binding.btnLogin.isEnabled = true
+                binding.btnLogin.setBackgroundResource(R.color.blue)
+            } else {
+                binding.btnLogin.isEnabled = false
+                binding.btnLogin.setBackgroundResource(R.color.grayish_blue)
+            }
+        }
+
         for (i in editTexts.indices) {
             editTexts[i].addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -138,10 +153,12 @@ class OTPFragment : Fragment() {
                                 editTexts[i - 1].requestFocus()
                             }
                         }
+                        updateLoginButtonState()
                     }
                 }
             })
         }
+        updateLoginButtonState()
     }
 
     private fun getUserNumber() {
@@ -152,6 +169,7 @@ class OTPFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.resetOtpState()
         _binding = null
     }
 

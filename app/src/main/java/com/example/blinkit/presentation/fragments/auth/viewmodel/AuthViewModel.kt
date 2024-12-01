@@ -35,11 +35,18 @@ class AuthViewModel @Inject constructor(
     private val _isACurrentUser = MutableStateFlow(false)
     val isACurrentUser: StateFlow<Boolean> = _isACurrentUser
 
+    fun resetOtpState() {
+        _verificationId.value = null
+        _otpSend.value = false
+    }
+
     init {
         _isACurrentUser.value = Extensions.getAuthInstance().currentUser != null
     }
 
     fun sendOTP(userNumber: String, activity: Activity) {
+        _verificationId.value = null
+        _otpSend.value = false
         val callback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {}
@@ -52,6 +59,7 @@ class AuthViewModel @Inject constructor(
             ) {
                 _verificationId.value = verificationId
                 _otpSend.value = true
+                Extensions.hideDialog()
             }
         }
 
