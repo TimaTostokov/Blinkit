@@ -4,7 +4,7 @@ import com.example.blinkit.R
 import com.example.blinkit.presentation.activity.MainActivity
 
 object Constants {
-
+    const val SCREEN_CAPTURE_REQUEST_CODE = 1001
     lateinit var APP_ACTIVITY: MainActivity
 
     val allProductsCategory = arrayOf(
