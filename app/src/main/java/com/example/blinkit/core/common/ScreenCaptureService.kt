@@ -1,7 +1,5 @@
 package com.example.blinkit.core.common
 
-// ScreenCaptureService.kt
-
 import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
@@ -43,7 +41,6 @@ class ScreenCaptureService : Service() {
     private var imageReader: ImageReader? = null
 
     override fun onBind(intent: Intent?): IBinder? {
-        // Сервис не поддерживает связывание
         return null
     }
 
@@ -65,9 +62,11 @@ class ScreenCaptureService : Service() {
                 val mediaProjectionManager =
                     getSystemService(MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
 
-                mediaProjection = mediaProjectionManager.getMediaProjection(resultCode, resultData!!)
+                mediaProjection =
+                    mediaProjectionManager.getMediaProjection(resultCode, resultData!!)
                 startCapture()
             }
+
             ACTION_STOP -> {
                 stopCapture()
                 stopForeground(true)
@@ -141,10 +140,14 @@ class ScreenCaptureService : Service() {
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
-            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Screenshots")
+            put(
+                MediaStore.MediaColumns.RELATIVE_PATH,
+                Environment.DIRECTORY_PICTURES + "/Screenshots"
+            )
         }
 
-        val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        val uri =
+            contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
 
         try {
             val outputStream = contentResolver.openOutputStream(uri!!)
@@ -171,7 +174,7 @@ class ScreenCaptureService : Service() {
         return NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Захват экрана")
             .setContentText("Происходит захват экрана...")
-            .setSmallIcon(R.drawable.app_icon) // Замените на ваш значок
+            .setSmallIcon(R.drawable.app_icon)
             .build()
     }
 
@@ -179,4 +182,5 @@ class ScreenCaptureService : Service() {
         super.onDestroy()
         stopCapture()
     }
+
 }

@@ -124,7 +124,6 @@ class MainActivity : AppCompatActivity() {
             if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                 requestScreenCapturePermission()
             } else {
-                // Разрешения не предоставлены
                 Toast.makeText(this, "Необходимы разрешения для работы приложения", Toast.LENGTH_SHORT).show()
             }
         }
@@ -206,7 +205,6 @@ class MainActivity : AppCompatActivity() {
             fos.flush()
             fos.close()
 
-            // Добавляем изображение в галерею
             MediaStore.Images.Media.insertImage(
                 contentResolver, imageFile.absolutePath, filename, null
             )
