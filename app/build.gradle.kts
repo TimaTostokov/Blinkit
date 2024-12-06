@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.navsafeargs)
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -89,7 +90,8 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.firebase.storage.ktx)
     implementation(libs.firebase.database.ktx)
-
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
     implementation (libs.multidex)
 
     implementation(libs.androidx.core.ktx)
@@ -101,6 +103,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation (libs.lottie)
+    implementation (libs.circularfillableloaders)
     implementation(libs.zoomage)
     implementation(libs.github.zoomhelper)
 

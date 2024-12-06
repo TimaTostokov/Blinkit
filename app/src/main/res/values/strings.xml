@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="blinkit">Blink</string>
     <string name="it">it</string>
+    <string name="fridge">Fridge</string>
+    <string name="classic">Classic</string>
+    <string name="plug_out">Plug out</string>
+    <string name="plug_in">Plug in</string>
 </resources>
