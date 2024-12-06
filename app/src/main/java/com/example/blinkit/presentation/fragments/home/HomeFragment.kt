@@ -19,6 +19,7 @@ import kotlin.math.min
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
+
     private val crashlytics = FirebaseCrashlytics.getInstance()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
