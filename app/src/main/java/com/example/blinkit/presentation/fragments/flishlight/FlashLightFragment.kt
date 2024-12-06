@@ -14,7 +14,6 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.blinkit.R
 import com.example.blinkit.core.common.viewBinding
 import com.example.blinkit.databinding.FragmentFlashLightBinding
