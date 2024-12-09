@@ -109,3 +109,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hiltCompiler = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 
 navsafeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safeargs" }
+android-library = { id = "com.android.library", version.ref = "agp" }

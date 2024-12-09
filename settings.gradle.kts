@@ -25,3 +25,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Blinkit"
 include(":app")
+include(":custom-navigation")
